@@ -1,35 +1,44 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect } from "react";
 import { useState } from "react";
 import axios from "axios";
-import styles from "./DogPic.module.css"
+import styles from "./DogPic.module.css";
 
 const DogPic = () => {
   const [breed, setBreed] = useState("Random");
   const [dogImage, setDogImage] = useState("");
+
   const getDogImage = async () => {
-    let url = "https://dog.ceo/api/breeds/image/random";
-    const response = await axios.get(url);
-    setDogImage(response.data.message)
+    try {
+      let url = "";
+      if (breed === "Random") {
+        url = "https://dog.ceo/api/breeds/image/random";
+      } else {
+        url = `https://dog.ceo/api/breed/${breed}/images/random`;
+      }
+
+      const response = await axios.get(url);
+      setDogImage(response.data.message);
+    } catch (error) {
+      console.log(error);
+    }
   };
-  
-  useEffect(()=>{
+
+  useEffect(() => {
     getDogImage();
-  },[])
+  }, [breed]);
 
   return (
     <div className={styles.wrapper}>
       <div className={styles.main}>
         <label>
           Select a breed:
-          <select
-            value={breed}
-            onChange={(e) => setBreed(e.target.value)}
-          >
+          <select value={breed} onChange={(e) => setBreed(e.target.value)}>
             <option value="Random">Random</option>
-            <option value="Beagle">Beagle</option>
-            <option value="Boxer">Boxer</option>
-            <option value="Dalmatian">Dalmatian</option>
-            <option value="Husky">Husky</option>
+            <option value="beagle">Beagle</option>
+            <option value="boxer">Boxer</option>
+            <option value="dalmatian">Dalmatian</option>
+            <option value="husky">Husky</option>
           </select>
         </label>
       </div>
