@@ -1,12 +1,12 @@
 import "./App.css";
+import DogPic from "./Components/DogPic";
 
 function App() {
-  return <>
-    <div >
-      <p>Select a breed</p>
-      
-    </div>
-  </>;
+  return (
+    <>
+      <DogPic />
+    </>
+  );
 }
 
 export default App;
