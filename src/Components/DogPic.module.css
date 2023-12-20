@@ -1,0 +1,13 @@
+.wrapper{
+    margin: 20px;
+    padding: 10px 20px;
+}
+
+.main{
+    padding: 10px;
+}
+
+img{
+    height: 400px;
+    width: 400px;
+}
