@@ -8,7 +8,7 @@ const DogPic = () => {
   const [breed, setBreed] = useState("Random");
   const [dogImage, setDogImage] = useState("");
 
-  const getDogImage = async () => {
+  const getDogImage = async (breed) => {
     try {
       let url = "";
       if (breed === "Random") {
@@ -24,8 +24,16 @@ const DogPic = () => {
     }
   };
 
+  const handleNextButton = ()=>{
+        if(breed === "Random"){
+            getDogImage("Random")
+        }else{
+            getDogImage(breed)
+        }
+  }
+
   useEffect(() => {
-    getDogImage();
+    getDogImage(breed);
   }, [breed]);
 
   return (
@@ -44,7 +52,7 @@ const DogPic = () => {
       </div>
       <img src={dogImage} alt="Dogimg" />
       <br />
-      <button>Next</button>
+      <button onClick={handleNextButton}>Next</button>
     </div>
   );
 };
